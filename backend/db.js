@@ -1,6 +1,8 @@
 const mongoose=require('mongoose');
 //const mongooseURI="mongodb://127.0.0.1:27017/snehadataBase1";
 //console.log(mongooseURI);
+const dotenv = require('dotenv');
+dotenv.config();
 
 const connectToMongo=()=>{
     mongoose.connect("mongodb://127.0.0.1:27017/NoteSyncDb")
