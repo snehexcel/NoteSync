@@ -1,4 +1,4 @@
-require("dotenv").config(); // Load environment variables first
+require("dotenv").config(); // Load environment variables
 
 const express = require("express");
 const cors = require("cors");
@@ -8,7 +8,6 @@ const connectToMongo = require("./db"); // Ensure db.js properly connects to Mon
 connectToMongo();
 
 const app = express();
-const port = process.env.PORT || 5000; // Use PORT from .env or default to 5000
 
 // Middleware
 app.use(cors());
@@ -16,14 +15,17 @@ app.use(express.json()); // Parse JSON request bodies
 
 // Test route
 app.get("/", (req, res) => {
-  res.send("Hello Sneha!");
+  res.send("Hello Sneha! Backend is working 🎉");
 });
 
 // Available Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/notes", require("./routes/notes"));
 
-// Start the server
-app.listen(port, () => {
-  console.log(`✅ NoteSync backend listening on port ${port}`);
-});
+// ❌ Remove app.listen() (Vercel doesn't need this)
+// app.listen(port, () => {
+//   console.log(`✅ NoteSync backend listening on port ${port}`);
+// });
+
+// ✅ Export the Express app (Needed for Vercel)
+module.exports = app;
